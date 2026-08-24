@@ -1809,19 +1809,10 @@ export default function App() {
             <div className="absolute z-50" style={{ top: 12, left: "50%", transform: "translateX(-50%)", width: 120, height: 34, background: "#000", borderRadius: 20, border: "1px solid #222" }} />
 
             {/* Status bar */}
-            <div className="absolute top-0 left-0 right-0 h-14 flex items-end justify-between px-6 pb-1.5 z-40">
-              <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 9, color: "#FFD700" }}>9:41</span>
-              <div className="flex items-center gap-2">
-                <div className="flex items-end gap-0.5">
-                  {[3, 4, 6, 8].map((h, i) => <div key={i} style={{ width: 3, height: h, background: "#FFD700", borderRadius: 1, opacity: i === 3 ? 0.35 : 1 }} />)}
-                </div>
-                <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 7, color: "#FFD700" }}>WiFi</span>
                 <div className="flex items-center gap-0.5" style={{ border: "1px solid rgba(255,215,0,0.6)", borderRadius: 3, padding: "1px 2px" }}>
                   <div style={{ width: 14, height: 8, background: "#FFD700", borderRadius: 1 }} />
                   <div style={{ width: 3, height: 5, borderRadius: 1, border: "1px solid rgba(255,215,0,0.4)" }} />
                 </div>
-              </div>
-            </div>
           </>
         )}
 

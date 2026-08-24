@@ -6,7 +6,6 @@ import claymationMap from "./assets/claymation-map.webp"
 import tvFrame from "./assets/tv-frame.webp"
 import splashBg from "./assets/splash-bg.webp"
 import titleLogo from "./assets/title-logo.webp"
-import appBackground from "./assets/app-background.webp"
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -198,16 +197,13 @@ function TVShell({
   sparkInScreen?: boolean
 }) {
   return (
-    <div
-      className="relative flex-shrink-0 mx-auto"
-      style={{ width: "auto", maxWidth: "100%", height: "auto", maxHeight: "58dvh", aspectRatio: "940 / 1549" }}
-    >
+    <div className="relative w-full flex-shrink-0">
       {/* Physical TV frame */}
-      <ImageWithFallback src={tvFrame} alt="Retro CRT television" style={{ width: "100%", height: "100%", display: "block", borderRadius: "7%/4.5%" }} />
+      <ImageWithFallback src={tvFrame} alt="Retro CRT television" className="w-full block" />
       {/* Screen area positioned over the TV's glass opening */}
       <div
         className="absolute overflow-hidden crt-screen-on"
-        style={{ top: "7%", left: "10%", right: "8%", bottom: "19%", borderRadius: "7%/5%" }}
+        style={{ top: "8%", left: "8%", right: "8%", bottom: "22%" }}
       >
         {/* Screen fill */}
         <div className="absolute inset-0" style={{ background: "#000608" }} />
@@ -247,8 +243,8 @@ function TVShell({
         {sparkSpeech && sparkInScreen && (
           <div className="absolute z-20 flex items-end gap-1.5" style={{ bottom: "3%", left: "3%" }}>
             <DrSpark size={sparkSize} />
-            <div style={{ marginBottom: 24 }}>
-              <SpeechBubble text={sparkSpeech} width={161} />
+            <div style={{ marginBottom: 30 }}>
+              <SpeechBubble text={sparkSpeech} width={176} />
             </div>
           </div>
         )}
@@ -288,7 +284,7 @@ function AppHeader() {
     <div className="flex items-center gap-2 px-3 pt-1 pb-1 flex-shrink-0">
       {/* Chrome title */}
       <div className="flex-1 text-center">
-        {["PRODUCT", "IMAGINATION"].map((word) => (
+        {["PRODUCT IMAGINATION"].map((word) => (
           <div
             key={word}
             style={{
@@ -818,12 +814,9 @@ function WelcomeScreen({ onNext }: { onNext: () => void }) {
         ))}
       </div>
       {/* TV with welcome message */}
-      <div
-        className="relative flex-shrink-0 mx-auto"
-        style={{ width: "auto", maxWidth: "100%", height: "auto", maxHeight: "58dvh", aspectRatio: "940 / 1549" }}
-      >
-        <ImageWithFallback src={tvFrame} alt="CRT TV" style={{ width: "100%", height: "100%", display: "block" }} />
-        <div className="absolute overflow-hidden" style={{ top: "7%", left: "10%", right: "8%", bottom: "19%", borderRadius: "7%/5%", background: "#000610" }}>
+      <div className="relative w-full flex-shrink-0">
+        <ImageWithFallback src={tvFrame} alt="CRT TV" className="w-full block" />
+        <div className="absolute overflow-hidden" style={{ top: "8%", left: "8%", right: "8%", bottom: "22%", background: "#000610" }}>
           <div style={{ padding: "10px 10px 0 10px", height: "100%", display: "flex", flexDirection: "column", gap: 6 }}>
             <div style={{ fontFamily: "'VT323', monospace", fontSize: 16, color: "#00FFEA", lineHeight: 1.5 }}>
               <span style={{ color: "#FF00FF" }}>{"DR. SPARK: "}</span>
@@ -899,7 +892,7 @@ function HomeScreen({ onNav, onEnter }: { onNav: (t: string) => void; onEnter: (
   return (
     <MainLayout
       sparkSpeech="Ready to think weird?"
-      sparkSize={83}
+      sparkSize={104}
       sparkInScreen
       ctaLabel="ENTER THE PORTAL"
       onCTA={onEnter}
@@ -1768,32 +1761,41 @@ export default function App() {
       className={isCompact ? "" : "min-h-screen flex items-center justify-center p-4"}
       style={{ background: isCompact ? "#000" : "radial-gradient(ellipse at 50% 40%,#0a0018 0%,#000 80%)" }}
     >
-      {/* Claymation background for the whole app — visible edge-to-edge on
-          mobile and behind the device mockup on desktop, both at 80% opacity */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none" aria-hidden>
-        <img
-          src={appBackground}
-          alt=""
-          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", opacity: 0.8 }}
-        />
-      </div>
-
-      {/* Decorative starfield — only makes sense on a wide viewport where the
-          device mockup doesn't already fill the screen. */}
+      {/* Decorative "device in a box" chrome — only makes sense on a wide viewport.
+          On an actual phone this fixed-size mockup is bigger than the real screen,
+          so all of this (and the ambient background behind it) would render
+          entirely off-screen; skip it and go edge-to-edge instead. */}
       {!isCompact && (
-        <div className="fixed inset-0 overflow-hidden pointer-events-none" aria-hidden>
-          {STARS.slice(0, 35).map((s, i) => (
-            <div key={i} className="absolute rounded-full bg-white" style={{ width: 1, height: 1, left: `${s.x}%`, top: `${s.y}%`, opacity: 0.18 }} />
-          ))}
-        </div>
+        <>
+          {/* Retro-console screen artwork, dimmed behind the phone */}
+          <div className="fixed inset-0 overflow-hidden pointer-events-none" aria-hidden>
+            <img
+              src={tvFrame}
+              alt=""
+              style={{
+                width: "100%", height: "100%", objectFit: "cover", objectPosition: "center",
+                opacity: 0.4, filter: "blur(2px) saturate(1.1)",
+                transform: "scale(1.06)",
+              }}
+            />
+            <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 40%, rgba(10,0,24,0.5) 0%, rgba(0,0,0,0.85) 75%, #000 100%)" }} />
+          </div>
+
+          {/* Ambient stars behind phone */}
+          <div className="fixed inset-0 overflow-hidden pointer-events-none" aria-hidden>
+            {STARS.slice(0, 35).map((s, i) => (
+              <div key={i} className="absolute rounded-full bg-white" style={{ width: 1, height: 1, left: `${s.x}%`, top: `${s.y}%`, opacity: 0.18 }} />
+            ))}
+          </div>
+        </>
       )}
 
       {/* iPhone 15 Pro frame (desktop) / edge-to-edge app shell (mobile) */}
       <div
         className="relative flex-shrink-0 overflow-hidden"
         style={isCompact ? {
-          width: "100%", height: "100dvh",
-          background: "transparent",
+          width: "100%", height: "100dvh", minHeight: "100vh",
+          background: "#000",
         } : {
           width: 393, height: 852,
           background: "#000",
@@ -1827,7 +1829,7 @@ export default function App() {
         {/* Content */}
         <div
           className="absolute inset-0 flex flex-col"
-          style={{ paddingTop: isCompact ? "env(safe-area-inset-top)" : 56, background: isCompact ? "transparent" : "#000" }}
+          style={{ paddingTop: isCompact ? "env(safe-area-inset-top)" : 56, background: "#000" }}
         >
           <div className="relative flex-1 flex flex-col overflow-hidden">
             {renderScreen()}
@@ -1851,7 +1853,6 @@ export default function App() {
           </span>
         </div>
       )}
-
 
       {/* Keyframes */}
       <style>{`

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Replace https://www.example.com with the site's production domain before launch. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://www.example.com/</loc></url>
+  <url><loc>https://www.example.com/services</loc></url>
+  <url><loc>https://www.example.com/projects</loc></url>
+  <url><loc>https://www.example.com/projects/modular-amr-platform</loc></url>
+  <url><loc>https://www.example.com/projects/purpose-built-assembly-machine</loc></url>
+  <url><loc>https://www.example.com/projects/vibratory-part-feeding-system</loc></url>
+  <url><loc>https://www.example.com/projects/cnc-machine-tending-cell</loc></url>
+  <url><loc>https://www.example.com/projects/automated-dimensional-inspection-fixture</loc></url>
+  <url><loc>https://www.example.com/projects/handheld-diagnostic-device</loc></url>
+  <url><loc>https://www.example.com/projects/collaborative-robot-workcell</loc></url>
+  <url><loc>https://www.example.com/projects/multi-part-workholding-system</loc></url>
+  <url><loc>https://www.example.com/about</loc></url>
+  <url><loc>https://www.example.com/process</loc></url>
+  <url><loc>https://www.example.com/consultation</loc></url>
+  <url><loc>https://www.example.com/contact</loc></url>
+</urlset>

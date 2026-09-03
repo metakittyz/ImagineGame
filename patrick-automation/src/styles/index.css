@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+::selection {
+  background: #2452D9;
+  color: #FAFAF8;
+}
+
+body {
+  font-feature-settings: 'ss01' on, 'cv11' on;
+}
+
+.label-mono {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.focus-ring {
+  outline: none;
+}
+.focus-ring:focus-visible {
+  outline: 2px solid #2452D9;
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: #15181C;
+  color: #FAFAF8;
+  padding: 0.75rem 1.25rem;
+  font-weight: 600;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(21, 24, 28, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(21, 24, 28, 0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.dim-line {
+  stroke: #8A9098;
+  stroke-width: 1;
+}
